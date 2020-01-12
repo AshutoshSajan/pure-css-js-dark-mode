@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme='light'>
+<head>
+	<meta charset="UTF-8">
+	<title>Dark mode</title>
+	<link rel="stylesheet" href="./assets/stylesheets/main.css">
+</head>
+<body>
+	<div class="container">
+		<h1 class="title">Light / Dark Mode</h4>
+
+		<div class="toggle-container">
+			<input type="checkbox" id="switch" name='theme' />
+			<label for='switch'>Toggle</label>
+		</div>
+
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor obcaecati rem nemo, inventore a, similique omnis maiores neque alias qui, dolore incidunt harum esse. Doloribus nihil, iure iusto nobis sunt.
+		</p>
+
+	</div>
+
+	<!-- js script -->
+	<script>
+		let checkbox = document.querySelector('input[name=theme]');
+		
+		function trans(){
+			document.documentElement.classList.add('transition');
+			window.setTimeout(() => {
+				document.documentElement.classList.remove('transition');
+			}, 1000)
+		}
+
+		checkbox.addEventListener('change', function() {
+			console.log(this.checked);
+			if(this.checked){
+				trans();
+				document.documentElement.setAttribute('data-theme', 'dark');
+			} else {
+				trans();
+				document.documentElement.setAttribute('data-theme', 'light');
+			}
+		})
+	</script>
+</body>
+</html>
