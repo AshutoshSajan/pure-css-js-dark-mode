@@ -22,23 +22,40 @@
 
 	<!-- js script -->
 	<script>
-		let checkbox = document.querySelector('input[name=theme]');
-		
-		function trans(){
+		const checkbox = document.querySelector('input[name=theme]');
+		const { theme } = localStorage;
+		let isChecked = true;
+
+		(function setThemeFromSettings(){
+			if(theme){			
+				document.documentElement.setAttribute('data-theme', theme);
+				if(theme === 'dark' ){
+					checkbox.checked = isChecked;
+				} else if (theme === 'light' ){
+					checkbox.checked = !isChecked;
+				}
+			}
+		})();
+
+		function addTransition(){
 			document.documentElement.classList.add('transition');
 			window.setTimeout(() => {
 				document.documentElement.classList.remove('transition');
 			}, 1000)
 		}
 
+		function setTheme(theme){
+			localStorage.setItem('theme', theme);
+			document.documentElement.setAttribute('data-theme', theme);
+		}
+
 		checkbox.addEventListener('change', function() {
-			console.log(this.checked);
 			if(this.checked){
-				trans();
-				document.documentElement.setAttribute('data-theme', 'dark');
+				addTransition();
+				setTheme('dark');
 			} else {
-				trans();
-				document.documentElement.setAttribute('data-theme', 'light');
+				addTransition();
+				setTheme('light');
 			}
 		})
 	</script>
